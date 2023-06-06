@@ -3,7 +3,7 @@
 import React from "react";
 
 // use Menu, Form, Container from semantic-ui to create signin page
-import {Menu, Form, Container} from "semantic-ui-react";
+import {Menu, Form, Container, Message} from "semantic-ui-react";
 
 // react-router-dom version 6 need to use useNavigate (not useHistory)
 import { useNavigate } from "react-router-dom";
@@ -25,10 +25,17 @@ function Signin() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
+    // error code and message
+    const [errorMessage, setErrorMessage] = React.useState("");
+
     // usehistory from useHistory
     const navigate = useNavigate();
 
+    // loading time for register/login
+    const [isLoading, setIsLoading] = React.useState(false);
+
     function onSubmit() {
+        setIsLoading(true);
         if (activeItem === "register") {
             // create an account
             firebase
@@ -39,6 +46,27 @@ function Signin() {
                     // history.push('/');
                     // react-router-dom version 6 need to use navigate
                     navigate("/");
+
+                    // loading time for register/login
+                    setIsLoading(false);
+                })
+                // catch to handle error situation
+                .catch((error) => {
+                    switch(error.code) {
+                            case "auth/email-already-in-use":
+                                setErrorMessage("Email already in used.")
+                                break;
+                            case "auth/invalid-email":
+                                setErrorMessage("Invalid Email format.")
+                            break;
+                            case "auth/weak-password":
+                                setErrorMessage("Weak password.")
+                            break;
+                        default:
+                    }
+                
+                    // loading time for register/login
+                    setIsLoading(false);
                 });
         } else if (activeItem === "signin") {
             // sign in
@@ -50,6 +78,26 @@ function Signin() {
                     // history.push('/');
                     // react-router-dom version 6 need to use navigate
                     navigate("/");
+
+                    // loading time for register/login
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    switch(error.code) {
+                            case "auth/invalid-email":
+                                setErrorMessage("Invalid Email format.")
+                                break;
+                            case "auth/user-not-found":
+                                setErrorMessage("User not existed.")
+                            break;
+                            case "auth/wrong-password":
+                                setErrorMessage("Wrong password.")
+                            break;
+                        default:
+                    }
+
+                    // loading time for register/login
+                    setIsLoading(false);
                 });
         }
     }
@@ -59,14 +107,18 @@ function Signin() {
             <Menu widths="2">
                 <Menu.Item 
                     active={activeItem === "register"} 
-                    onClick={() => setActiveItem("register")}
-                    >
+                    onClick={() => {
+                        setErrorMessage("")
+                    setActiveItem("register")}}
+                >
                     Register
                 </Menu.Item>
                 <Menu.Item 
                     active={activeItem === "signin"} 
-                    onClick={() => setActiveItem("signin")}
-                    >
+                    onClick={() => {
+                        setErrorMessage("")
+                    setActiveItem("signin")}}
+                >
                     Login
                 </Menu.Item>
             </Menu>
@@ -85,7 +137,8 @@ function Signin() {
                     placeholder="Please enter password"
                     type="password"
                     ></Form.Input>
-                <Form.Button>
+                {errorMessage && <Message negative>{errorMessage}</Message>}
+                <Form.Button loading={isLoading}>
                     {activeItem === "register" && "Register"}
                     {activeItem === "signin" && "Login"}
                 </Form.Button> 
