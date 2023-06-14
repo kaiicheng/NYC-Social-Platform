@@ -6,13 +6,21 @@ import "firebase/firestore";
 
 import firebase from "../utils/firebase";
 
+// react-router-dom version 6 need to use useNavigate (not useHistory)
+import { useNavigate } from "react-router-dom";
+
 function NewPost() {
     // return "New Post!";
+
+    // usehistory from useHistory
+    const navigate = useNavigate();
+
     const [title, setTitle] = React.useState("");
     const [content, setContent] = React.useState("");
     const [topics, setTopics] = React.useState([]);
     const [topicName, setTopicName] = React.useState("");
     const [file, setFile] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     // get data from firebase
     React.useEffect(() => {
@@ -47,6 +55,36 @@ function NewPost() {
         ? URL.createObjectURL(file)
         : "https://react.semantic-ui.com/images/wireframe/image.png";
 
+    function onSubmit() {
+
+        // loading time for submit
+        setIsLoading(true);
+
+        // once submitted, user will create a posts object on firebase firestore
+        const documentRef = firebase.firestore().collection("posts").doc()
+        documentRef.set({
+            title,
+            content,
+            topic: topicName,
+            createdAt: firebase.firestore.Timestamp.now(),
+            author: {  // map object on firebase firestore
+                // ||: or
+                displayName: firebase.auth().currentUser.displayName || "",
+                photoURL: firebase.auth().currentUser.photoURL || "",
+                uid: firebase.auth().currentUser.uid,
+                email: firebase.auth().currentUser.email,
+            },
+        }).then(() => {
+            // redirect to the homepage
+            // history.push('/');
+            // react-router-dom version 6 need to use navigate
+            navigate("/");
+
+            // loading time for submit
+            setIsLoading(false);
+        });
+    }
+
     return (
         <Container>
  
@@ -54,7 +92,7 @@ function NewPost() {
                 Publish a new post
             </Header>
 
-            <Form>
+            <Form onSubmit={onSubmit}>
 
                 {/* section for upload photos and preview */}
                 <Image 
@@ -106,7 +144,7 @@ function NewPost() {
                     value={topicName}
                     onChange={(e, { value}) => setTopicName(value)}
                 />
-                <Form.Button>Submit</Form.Button>
+                <Form.Button loading={isLoading}>Submit</Form.Button>
             </Form>
         </Container>
     )
