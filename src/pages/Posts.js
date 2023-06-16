@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Item, Image, Icon } from "semantic-ui-react";
+import { Grid, Item, Image, Icon, Container } from "semantic-ui-react";
 
 import Topics from "../components/Topics";
 
@@ -22,44 +22,50 @@ function Posts() {
     }, [])
     
     return (
-        <Grid>
-            {/* default grid size of row is 16 */}
-            <Grid.Row>
-                {/* <Grid.Column width={3}>Category</Grid.Column> */}
-                <Grid.Column width={3}><Topics/></Grid.Column>
+        <Container>
+            <Grid>
+                {/* default grid size of row is 16 */}
+                <Grid.Row>
+                    {/* <Grid.Column width={3}>Category</Grid.Column> */}
+                    <Grid.Column width={3}><Topics/></Grid.Column>
 
-                <Grid.Column width={10}>
-                    <Item.Group>
-                        {posts.map((post) => {
-                            // return <p>{post.title}</p>
-                            return (
-                                <Item key={post.id}>
-                                    <Item.Image src={post.imageURL} size="medium" />
-                                    <Item.Content>
-                                        <Item.Meta>
-                                            {post.author.photoURL ? (
-                                                <Image src={post.author.photoURL} />
-                                            ) : ( 
-                                                <Icon name="user circle"/>
-                                            )}
-                                            {post.topic} · {post.author.displayName || "User"}
-                                        </Item.Meta>
-                                        <Item.Header>{post.title}</Item.Header>
-                                        <Item.Description>{post.content}</Item.Description>
-                                        <Item.Extra>
-                                            Comment 0 · Like 0
-                                        </Item.Extra>
-                                    </Item.Content>
-                                </Item>
-                            );
-                            })  
-                        }
-                    </Item.Group>
-                </Grid.Column>
+                    <Grid.Column width={10}>
+                        <Item.Group>
+                            {posts.map((post) => {
+                                // return <p>{post.title}</p>
+                                return (
+                                    <Item key={post.id}>
+                                        {/* use photo uploaded or default image */}
+                                        <Item.Image 
+                                            src={post.imageURL || "https://react.semantic-ui.com/images/wireframe/image.png"} 
+                                            size="medium"
+                                        />
+                                        <Item.Content>
+                                            <Item.Meta>
+                                                {post.author.photoURL ? (
+                                                    <Image src={post.author.photoURL} />
+                                                ) : ( 
+                                                    <Icon name="user circle"/>
+                                                )}
+                                                {post.topic} · {post.author.displayName || "User"}
+                                            </Item.Meta>
+                                            <Item.Header>{post.title}</Item.Header>
+                                            <Item.Description>{post.content}</Item.Description>
+                                            <Item.Extra>
+                                                Comment 0 · Like 0
+                                            </Item.Extra>
+                                        </Item.Content>
+                                    </Item>
+                                );
+                                })  
+                            }
+                        </Item.Group>
+                    </Grid.Column>
 
-                <Grid.Column width={3}>Space</Grid.Column>
-            </Grid.Row>    
-        </Grid>
+                    <Grid.Column width={3}>Space</Grid.Column>
+                </Grid.Row>    
+            </Grid>
+        </Container>
     );
 }
 
