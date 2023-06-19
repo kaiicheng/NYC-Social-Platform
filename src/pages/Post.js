@@ -22,12 +22,56 @@ function Post() {
             .firestore()
             .collection("posts")
             .doc(postId)
-            .get()
-            .then((docSnapshot) => {
+
+            // monitoring and auto rendering
+            // below code enable bookmark change immediately right after click
+            .onSnapshot((docSnapshot) => {
                 const data = docSnapshot.data();
                 setPost(data);
-            });
+            })
+
+            // below code need to refresh the page every time after changing something
+            // .get()
+            // .then((docSnapshot) => {
+            //     const data = docSnapshot.data();
+            //     setPost(data);
+            // });
         }, []);
+
+    // function to save post and connect with firebase, firestore
+    function toggleCollected() {
+
+        const uid = firebase.auth().currentUser.uid;
+
+        if (isCollected) {
+            firebase
+                .firestore()
+                .collection("posts")
+                .doc(postId)
+                .update({
+
+                    // this will keep all previous users and remove the current users
+                    collectedBy: firebase.firestore.FieldValue.arrayRemove(uid),
+                });
+        } else {
+            firebase
+                .firestore()
+                .collection("posts")
+                .doc(postId)
+                .update({
+
+                    // this wil clear all other users
+                    // collectedBy: [uid],
+
+                    // this will keep all previous users and append the current users
+                    collectedBy: firebase.firestore.FieldValue.arrayUnion(uid),
+                });
+        }
+    }
+
+    // .collectedBy? to check if there's .collectedBy on firebase, firestore
+    // .includes() to check if there's current user
+    const isCollected = post.collectedBy?.includes(firebase.auth().currentUser.uid)
 
     return (
         <Container>
@@ -40,7 +84,14 @@ function Post() {
                     </Grid.Column>
 
                     <Grid.Column width={10}>
-                        <Image src={post.author.photoURL} /> {post.author.displayName}
+                        {/* display user icon if no photo of user */}
+                        {post.author.photoURL ? 
+                            (<Image src={post.author.photoURL} />
+                            ) : (
+                            <Icon name="user circle" />)
+                            } {""}
+                            {/* display User if no username */}
+                            {post.author.displayName || "User"}
                         <Header>
                             {post.title}
                             <Header.Subheader>
@@ -57,13 +108,21 @@ function Post() {
                         <Segment basic vertical>
                             Comment 0．Like 0．
                             <Icon name="thumbs up outline" color="grey"/>
-                            <Icon name="bookmark outline" color="grey"/>
+                            <Icon 
+                                // if saved before, the bookmark icon is blue. Otherwise, only outline
+                                // name="bookmark outline"
+                                // need to separate ...bookmark and ${... Otherwise, the bookmark won't show
+                                name={`bookmark ${isCollected ? "" : "outline"}`}
+                                color={isCollected ? "blue" : "grey"}
+                                link 
+                                onClick={toggleCollected}
+                            />
                         </Segment>
 
                     </Grid.Column>
 
                     <Grid.Column width={3}>
-                        Space
+                        
                     </Grid.Column>
 
                 </Grid.Row>    
