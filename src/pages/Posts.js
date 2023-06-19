@@ -2,6 +2,8 @@ import React from "react";
 
 import { Grid, Item, Image, Icon, Container } from "semantic-ui-react";
 
+import { Link } from "react-router-dom";
+
 import Topics from "../components/Topics";
 
 import firebase from "../utils/firebase";
@@ -31,10 +33,11 @@ function Posts() {
 
                     <Grid.Column width={10}>
                         <Item.Group>
-                            {posts.map((post) => {
+                            {posts.map((post) => { 
                                 // return <p>{post.title}</p>
                                 return (
-                                    <Item key={post.id}>
+                                    // as={Link} us Link item to render AND lead to  
+                                    <Item key={post.id} as={Link} to={`/posts/${post.id}`}>
                                         {/* use photo uploaded or default image */}
                                         <Item.Image 
                                             src={post.imageURL || "https://react.semantic-ui.com/images/wireframe/image.png"} 
@@ -52,7 +55,7 @@ function Posts() {
                                             <Item.Header>{post.title}</Item.Header>
                                             <Item.Description>{post.content}</Item.Description>
                                             <Item.Extra>
-                                                Comment 0 · Like 0
+                                                Comment 0 · Like {post.likedBy?.length || 0}
                                             </Item.Extra>
                                         </Item.Content>
                                     </Item>
