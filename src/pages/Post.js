@@ -2,7 +2,15 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Container, Grid, Image, Header, Segment, Icon } from "semantic-ui-react";
+import { 
+    Container, 
+    Grid, 
+    Image, 
+    Header, 
+    Segment, 
+    Icon,
+    Comment,
+    Form } from "semantic-ui-react";
 
 import Topics from "../components/Topics";
 import firebase from "../utils/firebase";
@@ -205,6 +213,24 @@ function Post() {
                                 onClick={() => toggle(isCollected, "collectedBy")}
                             />
                         </Segment>
+                            <Comment.Group>
+                                {/* reply increases the height of comment section */}
+                                <Form reply>
+                                    <Form.TextArea />
+                                    <Form.Button>Comment</Form.Button>
+                                </Form>
+                                <Header>1 Comment(s)</Header>
+                                <Comment>
+                                    <Comment.Avatar src="" />
+                                    <Comment.Content>
+                                        {/* as="span" is in-line element */}
+                                        <Comment.Author as="span">Username</Comment.Author> 
+                                        <Comment.Metadata>{new Date().toLocaleString()}</Comment.Metadata>
+                                        <Comment.Text>Content</Comment.Text>
+                                    </Comment.Content>
+                                </Comment>
+                            </Comment.Group>
+
 
                     </Grid.Column>
 
