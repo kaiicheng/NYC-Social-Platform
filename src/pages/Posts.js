@@ -24,14 +24,14 @@ function Posts() {
     }, [])
     
     return (
-        <Container>
-            <Grid>
-                {/* default grid size of row is 16 */}
-                <Grid.Row>
-                    {/* <Grid.Column width={3}>Category</Grid.Column> */}
-                    <Grid.Column width={3}><Topics/></Grid.Column>
+        // <Container>
+        //     <Grid>
+        //         {/* default grid size of row is 16 */}
+        //         <Grid.Row>
+        //             {/* <Grid.Column width={3}>Category</Grid.Column> */}
+        //             <Grid.Column width={3}><Topics/></Grid.Column>
 
-                    <Grid.Column width={10}>
+        //             <Grid.Column width={10}>
                         <Item.Group>
                             {posts.map((post) => { 
                                 // return <p>{post.title}</p>
@@ -63,12 +63,12 @@ function Posts() {
                                 })  
                             }
                         </Item.Group>
-                    </Grid.Column>
+        //             </Grid.Column>
 
-                    <Grid.Column width={3}>Space</Grid.Column>
-                </Grid.Row>    
-            </Grid>
-        </Container>
+        //             <Grid.Column width={3}>Space</Grid.Column>
+        //         </Grid.Row>    
+        //     </Grid>
+        // </Container>
     );
 }
 
