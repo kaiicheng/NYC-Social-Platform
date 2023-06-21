@@ -217,16 +217,18 @@ function Post() {
     }
 
     return (
-        <Container>
-            <Grid>
-                {/* default grid size of row is 16 */}
-                <Grid.Row>
-                    {/* <Grid.Column width={3}>Category</Grid.Column> */}
-                    <Grid.Column width={3}>
-                        <Topics/>
-                    </Grid.Column>
+        // <Container>
+        //     <Grid>
+        //         {/* default grid size of row is 16 */}
+        //         <Grid.Row>
+        //             {/* <Grid.Column width={3}>Category</Grid.Column> */}
+        //             <Grid.Column width={3}>
+        //                 <Topics/>
+        //             </Grid.Column>
 
-                    <Grid.Column width={10}>
+        //             <Grid.Column width={10}>
+
+        <>
                         {/* display user icon if no photo of user */}
                         {post.author.photoURL ? 
                             (<Image src={post.author.photoURL} />
@@ -306,16 +308,17 @@ function Post() {
 
                             </Comment.Group>
 
+        </>
+        //             </Grid.Column>
 
-                    </Grid.Column>
-
-                    <Grid.Column width={3}>
+        //             <Grid.Column width={3}>
                         
-                    </Grid.Column>
+        //             </Grid.Column>
 
-                </Grid.Row>    
-            </Grid>
-        </Container>
+        //         </Grid.Row>    
+        //     </Grid>
+        // </Container>
+        
     );
 }
 
