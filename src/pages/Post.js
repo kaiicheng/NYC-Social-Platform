@@ -23,6 +23,9 @@ function Post() {
     const [post, setPost] = React.useState({
         author: {},
     });
+    const [commentContent, setCommentContent] = React.useState("");
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [comments, setComments] = React.useState([]);
 
     React.useEffect(() => {
         // use .doc() to get the post from the .collection()
@@ -45,6 +48,26 @@ function Post() {
             //     setPost(data);
             // });
         }, []);
+
+    React.useEffect(() => {
+        firebase
+            .firestore()
+            .collection("posts")
+            .doc(postId)
+            .collection("comments")
+            // sort comments base on the time of comment created
+            // .orderBy("createdAt", "desc")  //descending
+            .orderBy("createdAt")  // asending
+            // monitoring firebase, update immediately once changes made
+            .onSnapshot((collectionSnapshot) => {
+                const data = collectionSnapshot.docs.map(doc => {
+                    return doc.data();
+                })
+                // console.log(data);
+                setComments(data);
+            })
+    }, [])
+
 
     function toggle(isActive, field) {
 
@@ -158,6 +181,41 @@ function Post() {
     // posts liked by the current user
     const isLiked = post.likedBy?.includes(firebase.auth().currentUser.uid)
 
+    // post a new comment, connect with firebase, firestore, and add one more post in the below comment list 
+    function onSubmit() {
+
+        setIsLoading(true);
+
+        // use firestore batch object
+        const firestore = firebase.firestore();
+        const batch = firestore.batch();
+
+        // update both count of comment and comment list
+        const postRef = firestore.collection("posts").doc(postId)  // get the post
+        // increase the count of posts by 1
+        batch.update(postRef, {
+            commentsCount: firebase.firestore.FieldValue.increment(1)
+        } )
+
+        // create a new union of comments under a post on firebase, firestore
+        const commentRef = postRef.collection("comments").doc();
+        batch.set(commentRef, {
+            content: commentContent,
+            createdAt: firebase.firestore.Timestamp.now(),
+            author: {
+                uid: firebase.auth().currentUser.uid,
+                displayName: firebase.auth().currentUser.displayName || "",
+                photoURL: firebase.auth().currentUser.photoURL || "",
+            },
+        });
+
+        // upload batch, load the comment button, and clear comment after submitting
+        batch.commit().then(() => {
+            setCommentContent("");
+            setIsLoading(false);
+        });
+    }
+
     return (
         <Container>
             <Grid>
@@ -191,7 +249,7 @@ function Post() {
                         {/* basic hide border and vertical remove border */}
                         <Segment basic vertical>{post.content}</Segment>
                         <Segment basic vertical>
-                            Comment 0．Like {post.likedBy?.length || 0}．
+                            Comment {post.commentsCount || 0}．Like {post.likedBy?.length || 0}．
                             {/* like icon */}
                             {/* <Icon name="thumbs up outline" color="grey"/> */}
                             <Icon 
@@ -216,19 +274,36 @@ function Post() {
                             <Comment.Group>
                                 {/* reply increases the height of comment section */}
                                 <Form reply>
-                                    <Form.TextArea />
-                                    <Form.Button>Comment</Form.Button>
+                                    {/* enable typing in the comment area */}
+                                    <Form.TextArea
+                                        value={commentContent}
+                                        onChange={(e) => setCommentContent(e.target.value)} 
+                                    />
+                                    <Form.Button onClick={onSubmit} loading={isLoading}>Comment</Form.Button>
                                 </Form>
-                                <Header>1 Comment(s)</Header>
-                                <Comment>
-                                    <Comment.Avatar src="" />
-                                    <Comment.Content>
-                                        {/* as="span" is in-line element */}
-                                        <Comment.Author as="span">Username</Comment.Author> 
-                                        <Comment.Metadata>{new Date().toLocaleString()}</Comment.Metadata>
-                                        <Comment.Text>Content</Comment.Text>
-                                    </Comment.Content>
-                                </Comment>
+                                {/* <Header>1 Comment(s)</Header> */}
+                                <Header>{post.commentsCount} Post(s)</Header>
+                                {comments.map((comment) => {
+                                    return (
+                                        <Comment>
+                                            <Comment.Avatar src={comment.author.photoURL}/>
+                                            <Comment.Content>
+                                                {/* as="span" is in-line element */}
+                                                {/* <Comment.Author as="span">Username</Comment.Author>  */}
+                                                <Comment.Author as="span">
+                                                    {comment.author.displayName || "User"}
+                                                </Comment.Author> 
+                                                {/* <Comment.Metadata>{new Date().toLocaleString()}</Comment.Metadata> */}
+                                                <Comment.Metadata>
+                                                    {comment.createdAt.toDate().toLocaleString()}
+                                                </Comment.Metadata>
+                                                {/* <Comment.Text>Content</Comment.Text> */}
+                                                <Comment.Text>{comment.content}</Comment.Text>
+                                            </Comment.Content>
+                                    </Comment>
+                                    );
+                                })}
+
                             </Comment.Group>
 
 
