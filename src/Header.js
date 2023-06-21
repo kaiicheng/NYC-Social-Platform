@@ -23,7 +23,7 @@ function Header() {
     // click Register/Login leads to /signin
     // click Social Platform leads to homepage
     return <Menu>
-        <Menu.Item as={Link} to="/">  
+        <Menu.Item as={Link} to="/posts">  
             Social Platform
         </Menu.Item>
         <Menu.Item>
@@ -33,9 +33,9 @@ function Header() {
             {user ? (
                 <>
                     <Menu.Item as={Link} to="/new-post">
-                        Post
+                        Publish
                     </Menu.Item>
-                    <Menu.Item as={Link} to="/my">
+                    <Menu.Item as={Link} to="/my/posts">
                         Account
                     </Menu.Item>
                     {/* after signOut, the currentUser will become null */}
