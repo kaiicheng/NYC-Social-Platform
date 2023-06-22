@@ -1,12 +1,18 @@
 import React from "react";
 
-import { Header, Button, Segment, Modal, Input } from "semantic-ui-react";
+import { 
+    Header,
+    Button, 
+    Segment, 
+    Modal, 
+    Input, 
+    Image } from "semantic-ui-react";
 
 import firebase from "../utils/firebase";
 
-function MyName() {
+function MyName({ user }) {
 
-    const user = firebase.auth().currentUser;
+    // const user = firebase.auth().currentUser || {};
 
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -17,14 +23,14 @@ function MyName() {
     function onSubmit() {
         setIsLoading(true);
         user
-            .updateProfile({
+        .updateProfile({
             // displayName: displayName,
             displayName,
         })
-            .then(() => {
-                setIsLoading(false);
-                setDisplayName("");
-                setIsModalOpen(false);
+        .then(() => {
+            setIsLoading(false);
+            setDisplayName("");
+            setIsModalOpen(false);
         })
     }
 
@@ -61,10 +67,97 @@ function MyName() {
     );
 }
 
+function MyPhoto({ user }) {
+
+    // const user = firebase.auth().currentUser || {};
+
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const [file, setFile] = React.useState(null);
+
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    // preview photo uploaded
+    const previewImageUrl = file ? URL.createObjectURL(file) : user.photoURL;
+
+    // function to upload photo of user
+    function onSubmit() {
+        
+        setIsLoading(true);
+
+        // get the object
+        const fileRef = firebase.storage().ref("user-photos/" + user.uid)
+        // upload file of photo
+        const metadata = {
+            contentType: file.type,
+        };
+        // upload file of photo
+        fileRef.put(file, metadata).then(() => {
+            // get url of file uploaded
+            fileRef.getDownloadURL().then((imageURL) => {
+                user
+                .updateProfile({
+                    photoURL: imageURL,
+                })
+                .then(() => {
+                    setIsLoading(false);
+                    setFile(null);
+                    setIsModalOpen(false);
+                })
+            })
+        });
+    }
+
+    return (
+        <>
+            <Header size="small">
+                Member photo
+                {/* floated="right" will locate button on right-hand side */}
+                <Button floated="right" onClick={() => setIsModalOpen(true)}>
+                    Edit
+                </Button>
+            </Header>
+            <Segment vertical>
+                <Image src={user.photoURL} avatar/>
+            </Segment>
+            <Modal open={isModalOpen} size="mini">
+                <Modal.Header>Edit user photo</Modal.Header>
+                <Modal.Content image>
+                    <Image src={previewImageUrl} avatar wrapped/>
+                    <Modal.Description>
+                        {/* clicking htmlFor="post-image" activates the next line having the same id */}
+                        <Button as="label" htmlFor="post-image">
+                            Upload
+                        </Button>
+                        <Input
+                            type="file" 
+                            id="post-image" 
+                            style={{ display: "none" }} 
+                            onChange={(e) => setFile(e.target.files[0])}
+                        />
+                    </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                    <Button onClick={onSubmit} loading={isLoading}>Edit</Button>
+                </Modal.Actions>
+            </Modal>
+        </>
+    )
+}
+
 function MySettings () {
     // return "Member info"
     
-    const user = firebase.auth().currentUser || {};
+    const [user, setUser] = React.useState({});
+
+    React.useEffect(() => {
+        firebase.auth().onAuthStateChanged((user) =>{
+            setUser(user);
+        });
+    }, []);
+
+    // const user = firebase.auth().currentUser || {};
 
     return (
     <>
@@ -72,16 +165,9 @@ function MySettings () {
             Member information
         </Header>
 
-        <MyName/>
+        <MyName user={user}/>
 
-        <Header size="small">
-            Member photo
-            {/* floated="right" will locate button on right-hand side */}
-            <Button floated="right">Edit</Button>
-        </Header>
-        <Segment vertical>
-            {UserActivation.photoURL}
-        </Segment>
+        <MyPhoto user={user}/>
 
         <Header size="small">
             Member password
