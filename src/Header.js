@@ -1,22 +1,56 @@
 // npm install sematic-ui-react semantic-ui-css react-router-dom
 import { Menu, Search } from "semantic-ui-react";
-import { Link } from "react-router-dom";  // need to use (BrwoserRouter) before using Link 
+// react-router-dom version 6 need to use useNavigate (not useHistory)
+import { Link, useNavigate } from "react-router-dom";  // need to use (BrwoserRouter) before using Link 
 
 import React from "react";
 
 import firebase from "./utils/firebase";
 
-function Header() {
+import algolia from "./utils/algolia";
 
-    // monitoring the state of signed or not
-    // initializinig state, not sure signed or not => null
-    const [user, setUser] = React.useState(null);
-    // after signOut, the currentUser will become null
-    React.useEffect(() => {
-        firebase.auth().onAuthStateChanged((currentUser) => {
-            setUser(currentUser);
+function Header({ user }) {
+
+    const navigate = useNavigate();
+    const [inputValue, setInputValue] = React.useState("");
+    const [results, setResults] = React.useState([]);
+
+    // function to show search result on the Header
+    function onSearchChange(e, { value }) {
+
+        setInputValue(value);
+
+        algolia.search(value).then((result) => {
+
+            // print out result on web console
+            // console.log(result.hits);
+
+            const searchResults = result.hits.map(hit => {
+                return {
+                    title: hit.title,
+                    description: hit.content,
+                    id: hit.objectID,
+                };
+            });
+            setResults(searchResults);
         });
-    }, []);
+    }
+
+    function onResultSelect(e, { result }) {
+        // history.push not working
+        navigate(`/posts/${result.id}`)
+    }
+
+    // use monitoring function from App.js
+    // // monitoring the state of signed or not
+    // // initializinig state, not sure signed or not => null
+    // const [user, setUser] = React.useState(null);
+    // // after signOut, the currentUser will become null
+    // React.useEffect(() => {
+    //     firebase.auth().onAuthStateChanged((currentUser) => {
+    //         setUser(currentUser);
+    //     });
+    // }, []);
 
     // navbar
     // to="/" is homepage
@@ -25,9 +59,16 @@ function Header() {
     return <Menu>
         <Menu.Item as={Link} to="/posts">  
             Social Platform
-        </Menu.Item>
+        </Menu.Item> 
         <Menu.Item>
-            <Search/>
+            {/* use search function */}
+            <Search
+                value={inputValue}
+                onSearchChange={onSearchChange}
+                results={results}
+                noResultsMessage="No posts found."
+                onResultSelect={onResultSelect}
+            />
         </Menu.Item>
         <Menu.Menu position="right">
             {user ? (

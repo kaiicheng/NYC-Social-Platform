@@ -146,16 +146,85 @@ function MyPhoto({ user }) {
     )
 }
 
-function MySettings () {
-    // return "Member info"
-    
-    const [user, setUser] = React.useState({});
+function MyPassword({ user }) {
 
-    React.useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) =>{
-            setUser(user);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const [oldPassword, setOldPassword] = React.useState("");
+
+    const [newPassword, setNewPassword] = React.useState("");
+
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    function onSubmit() {
+        setIsLoading(true);
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            oldPassword
+        );
+        user.reauthenticateWithCredential(credential).then(() => {        
+            user.updatePassword(newPassword).then(() => {
+                setIsModalOpen(false);
+                setOldPassword("");
+                setNewPassword("");
+                setIsLoading(false);
+            });
         });
-    }, []);
+    }
+
+    return (
+        <>
+            <Header size="small">
+                Member password
+                {/* floated="right" will locate button on right-hand side */}
+                <Button floated="right" onClick={() => setIsModalOpen(true)}>
+                    Edit
+                </Button>
+            </Header>
+            <Segment vertical>
+                *********
+            </Segment>
+            <Modal open={isModalOpen} size="mini">
+                <Modal.Header>Change user password</Modal.Header>
+                <Modal.Content>
+                    <Header size="small">Current password</Header>
+                    <Input
+                        type="Current password" 
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                        // fluid extend input section size
+                        fluid
+                    />
+                <Header size="small">New password</Header>
+                    <Input
+                        type="New password" 
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        // fluid extend input section size
+                        fluid
+                    />
+                </Modal.Content>
+
+                <Modal.Actions>
+                    <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                    <Button onClick={onSubmit} loading={isLoading} >Save</Button>
+                </Modal.Actions>
+            </Modal>
+        </>
+    )
+}
+
+function MySettings ({user}) {
+    // return "Member info"
+
+
+    // use monitoring function from App.js
+    // const [user, setUser] = React.useState({});
+    // React.useEffect(() => {
+    //     firebase.auth().onAuthStateChanged((user) =>{
+    //         setUser(user || {});
+    //     });
+    // }, []);
 
     // const user = firebase.auth().currentUser || {};
 
@@ -169,14 +238,7 @@ function MySettings () {
 
         <MyPhoto user={user}/>
 
-        <Header size="small">
-            Member password
-            {/* floated="right" will locate button on right-hand side */}
-            <Button floated="right">Edit</Button>
-        </Header>
-        <Segment vertical>
-            *********
-        </Segment>
+        <MyPassword user={user}/>
 
     </>
     );

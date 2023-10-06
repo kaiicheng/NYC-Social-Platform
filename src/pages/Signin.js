@@ -45,7 +45,7 @@ function Signin() {
                     // redirect to the homepage
                     // history.push('/');
                     // react-router-dom version 6 need to use navigate
-                    navigate("/");
+                    navigate("/posts");
 
                     // loading time for register/login
                     setIsLoading(false);
@@ -77,7 +77,7 @@ function Signin() {
                     // redirect to the homepage
                     // history.push('/');
                     // react-router-dom version 6 need to use navigate
-                    navigate("/");
+                    navigate("/posts");
 
                     // loading time for register/login
                     setIsLoading(false);

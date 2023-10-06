@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=1BpKTReF-O0&list=PLddLA9QpG2T2__tPfi6nwaL8Rf_wWQaz7&index=29
+
 import React from "react";
 
 import { useParams } from "react-router-dom";
@@ -209,6 +211,20 @@ function Post() {
             },
         });
 
+        // set up an auto email response function when anyone comments on a post
+        const mailRef = firestore.collection("mail").doc();
+        batch.set(mailRef, {
+            to: post.author.email,
+            message: {
+                subject: `New Message: ${
+                    firebase.auth().currentUser.displayName
+                } just commented on your post!`,
+                html: `<a href="${
+                    window.location.origin
+                }/posts/${postId}">Go to post</a>`
+            },
+        });
+
         // upload batch, load the comment button, and clear comment after submitting
         batch.commit().then(() => {
             setCommentContent("");
@@ -231,7 +247,7 @@ function Post() {
         <>
                         {/* display user icon if no photo of user */}
                         {post.author.photoURL ? 
-                            (<Image src={post.author.photoURL} />
+                            (<Image src={post.author.photoURL} avatar/>
                             ) : (
                             <Icon name="user circle" />)
                             } {""}

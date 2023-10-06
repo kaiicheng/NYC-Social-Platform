@@ -94,7 +94,7 @@ function NewPost() {
                     // redirect to the homepage
                     // history.push('/');
                     // react-router-dom version 6 need to use navigate
-                    navigate("/");
+                    navigate("/posts");
         
                     // loading time for submit
                     setIsLoading(false);

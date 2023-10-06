@@ -1,0 +1,278 @@
+[33mcommit 64a25dbf921f97cdb1b8b952819f6ea8647b09db[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: bd7b054 7d20db8
+Author: [your <tw841117@gmail.com>
+Date:   Fri Oct 6 00:48:07 2023 -0400
+
+    update home background photo
+
+[33mcommit bd7b054788fd98246723543ec0f06b3f88d8f289[m
+Author: [your <tw841117@gmail.com>
+Date:   Fri Oct 6 00:47:36 2023 -0400
+
+    update home background photo
+
+[33mcommit 7d20db876af1c2017987a759a19840e6b07e001a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Sep 27 21:18:19 2023 -0400
+
+    Add files via upload
+
+[33mcommit f682e1311db41f55b304389cf8539bff95941799[m
+Author: [your <tw841117@gmail.com>
+Date:   Wed Sep 27 21:15:01 2023 -0400
+
+    upload README.md
+
+[33mcommit 1cb8601447e4426baaae552639def4590bf07b28[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Tue Jun 27 14:25:14 2023 -0400
+
+    Update README.md
+
+[33mcommit 398744edfdab9c5d9299e1244fbea2c3c2f42ba3[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Thu Jun 22 11:23:22 2023 -0400
+
+    Update MySettings.js
+
+[33mcommit b09e3f2e7e96594524570489b85d81caec7404c9[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Thu Jun 22 10:33:32 2023 -0400
+
+    Create MySettings.js
+
+[33mcommit dabd7961a0d27806a15d8063ffbddcf56efefb2e[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Thu Jun 22 00:21:59 2023 -0400
+
+    Create MyPosts.js
+
+[33mcommit f42409ddacaa48eec09dda4b67204d1de077a28c[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 17:10:01 2023 -0400
+
+    Create MyMenu.js
+
+[33mcommit 994f98370f96e84a3b76f7040537c0dd8c21843f[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:41:14 2023 -0400
+
+    Update Post.js
+
+[33mcommit fa76df3b552114fea47600495429289ee4bea2b0[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:40:53 2023 -0400
+
+    Update Header.js
+
+[33mcommit bf851b48d25c6f2f7589ba6364af0378b33d2d60[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:40:28 2023 -0400
+
+    Update Posts.js
+
+[33mcommit b9ad4c13405d7141ee0d8990f36efd8b2bbc3a45[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:40:12 2023 -0400
+
+    Update App.js
+
+[33mcommit bbbf46a558ae44085bdd5299fa40efe480e8bad2[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:07:04 2023 -0400
+
+    Update Post.js
+
+[33mcommit 28a7bc68ebf911a95555a1cb15fe961999ac4175[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 15:06:47 2023 -0400
+
+    Update Posts.js
+
+[33mcommit 7547f4863b57ef66d95c7c1c9d09c0c712905ba0[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 21 14:29:03 2023 -0400
+
+    Update Posts.js
+
+[33mcommit 29f9319dd602eee475d680a9158bbeafac77da5e[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Tue Jun 20 10:48:27 2023 -0400
+
+    Update Post.js
+
+[33mcommit f50c0b635fcf9b0fc1864fcb3db2f094413c2fc1[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 19 19:03:13 2023 -0400
+
+    Update Posts.js
+
+[33mcommit fc2b59ad3c9f064de0e3d5f63c58ba341ad21d97[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 19 19:02:53 2023 -0400
+
+    Update Post.js
+
+[33mcommit ec4855f83631ec5f0d0c6c9639abbb3c52bdff72[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 19 13:04:30 2023 -0400
+
+    Update Post.js
+
+[33mcommit 7e584c56ef5d2bf4d5c591d469b146f5eaf47fc8[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun Jun 18 11:09:07 2023 -0400
+
+    Create Post.js
+
+[33mcommit 61ffd8dc5a15abf153cdbf774a74dc53127cc3f8[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun Jun 18 11:08:37 2023 -0400
+
+    Delete src/page directory
+
+[33mcommit ede384179b94cc56624ed8ead8c3e052b7f1ab30[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun Jun 18 11:08:22 2023 -0400
+
+    Create Post.js
+
+[33mcommit fec6d640091a4c527e5b56cfd040fdf64bdf9f10[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Fri Jun 16 16:03:15 2023 -0400
+
+    Update Posts.js
+
+[33mcommit 30315c41958b751423965f5576f038264ed0710c[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 14 18:09:10 2023 -0400
+
+    Update Posts.js
+
+[33mcommit 0dd7b7cff6ee3c45ca3247d6ec363013e5984352[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 14 17:27:35 2023 -0400
+
+    Update NewPost.js
+
+[33mcommit 03d43b27535c812d8bca52212cd57184b2776883[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 14 16:56:30 2023 -0400
+
+    Update NewPost.js
+
+[33mcommit 6f17b436942a2f0a781cc20f97ce3a95ef558708[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 14 15:25:56 2023 -0400
+
+    Create NewPost.js
+
+[33mcommit 30665982e7d6644869deed188bfa59839996fa95[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 14 15:24:42 2023 -0400
+
+    Update Topics.js
+
+[33mcommit 71e490e98a63d2b765448893233b061a87507341[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun Jun 11 23:14:01 2023 -0400
+
+    Add files via upload
+
+[33mcommit 846f4f9635f5afff9528f77ae4371900e00050b9[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 7 01:27:27 2023 -0400
+
+    Update Topics.js
+
+[33mcommit b75682be5059cc66be17fac5e4958d0feab155da[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Wed Jun 7 01:27:12 2023 -0400
+
+    Create Topics.js
+
+[33mcommit 192aed035e788cd2bc9dd7ed8240ea6008a5174d[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Tue Jun 6 13:03:05 2023 -0400
+
+    Update Signin.js
+
+[33mcommit da12048b095aca2f9a2b51071536630818301f4a[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Tue Jun 6 12:02:18 2023 -0400
+
+    Update Header.js
+
+[33mcommit fd5105f400683bdd6ad58de3267037bfb024a223[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 5 22:50:41 2023 -0400
+
+    Update Signin.js
+
+[33mcommit 23f967e608f7d0a20efa8fd8bfe389dfbb4632d9[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 5 22:50:20 2023 -0400
+
+    Update firebase.js
+
+[33mcommit 92cd55b9b50c90c62063f7b0ccae8217e5fddecd[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon Jun 5 21:50:24 2023 -0400
+
+    Create firebase.js
+
+[33mcommit d7e6326feb80f4baa300393c399a85bfa825a7b5[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:29:08 2023 -0400
+
+    Add files via upload
+
+[33mcommit e874d7466fcf7039488cfd7a09e59256e0f84cb7[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:28:59 2023 -0400
+
+    Delete 123
+
+[33mcommit 900aa4e5ec41464c6cd6ecf05f4c02806012283f[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:28:47 2023 -0400
+
+    Add files via upload
+
+[33mcommit ce255f9b3c90a20cc110097b6452bfc6faf9c41d[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:28:41 2023 -0400
+
+    Create 123
+
+[33mcommit 41b2b013e42fa88119944601a0b6a171c529a86f[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:28:26 2023 -0400
+
+    Delete 123
+
+[33mcommit 24ed72daafb665daeb881c53a75fdd8a96032cbd[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:28:18 2023 -0400
+
+    Create 123
+
+[33mcommit 9914ed85f3a5c1fae89c05339b1eb998ca9d7684[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Mon May 22 00:27:53 2023 -0400
+
+    Add files via upload
+
+[33mcommit 8841553456cdc2d851b1c766edae0d35b587f0a2[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun May 21 23:10:55 2023 -0400
+
+    Create README.md
+
+[33mcommit 3bd500be5350a832e2fa8f0b02e383bcc631e149[m
+Author: Kai <33795285+kaiicheng@users.noreply.github.com>
+Date:   Sun May 21 23:10:25 2023 -0400
+
+    Delete 123
+
+[33mcommit 3

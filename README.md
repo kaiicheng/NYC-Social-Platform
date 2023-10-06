@@ -1,6 +1,6 @@
 # Social Media Platform
 
-![Platform Screenshot](screenshot.png)
+https://kai-social-platform.web.app/
 
 A social media platform built with React, Firebase, and Semantic UI React.
 

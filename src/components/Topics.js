@@ -1,20 +1,19 @@
-import { Container, Header, Form, Image, Button } from "semantic-ui-react"; 
+// shared components will be stored in the components folder
 
 import React from "react";
-
+import firebase from "../utils/firebase";
+import { List } from "semantic-ui-react";
+import { Link, useLocation } from "react-router-dom"
 import "firebase/firestore";
 
-import firebase from "../utils/firebase";
+function Topics () {
+    
+    const location = useLocation();
+    const urlSearchParams = new URLSearchParams(location.search);
+    const currentTopic = urlSearchParams.get("topic");
 
-function NewPost() {
-    // return "New Post!";
-    const [title, setTitle] = React.useState("");
-    const [content, setContent] = React.useState("");
     const [topics, setTopics] = React.useState([]);
-    const [topicName, setTopicName] = React.useState("");
-    const [file, setFile] = React.useState(null);
 
-    // get data from firebase
     React.useEffect(() => {
         firebase
             .firestore()
@@ -36,80 +35,27 @@ function NewPost() {
             });
     }, []);
 
-    const options = topics.map(topic => {
-        return {
-            text: topic.name,
-            value: topic.name,
-        }   
-    })
-
-    const previewUrl = file 
-        ? URL.createObjectURL(file)
-        : "https://react.semantic-ui.com/images/wireframe/image.png";
-
+    // return "Hello, Topics"
+    
+    // change returned object into list
     return (
-        <Container>
- 
-            <Header>
-                Publish a new post
-            </Header>
-
-            <Form>
-
-                {/* section for upload photos and preview */}
-                <Image 
-                    src={previewUrl}
-                    size="medium"
-                    floated="left"/>
-                <Button basic as="label" htmlFor="post-image">Upload photo</Button >
-                <Form.Input 
-                    type="file" 
-                    id="post-image" 
-                    style={{display: "none"}}
-                    onChange={(e) => setFile(e.target.files[0])}
-                />
-
-
-                {/* section for text and category */}
-                <Form.Input 
-                    placeholder="Type the title" 
-                    value={title} 
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+        <List animated selection>
+            {topics.map(topic => {
+                return (
                 
-                <Form.TextArea
-                    placeholder="Write the content" 
-                    value={content} 
-                    onChange={(e) => setContent(e.target.value)}
-                />
+                // add the link of doamin address once topic categories clicked
+                <List.Item 
+                    key={topic.name}
+                    as={Link}
+                    to={`/posts?topic=${topic.name}`}
+                    // make the words bold once categories selected
+                    active={currentTopic === topic.name}
+                >
+                    {topic.name}
+                </List.Item>
+                )
+        })}</List>
+    );
+}
 
-                <Form.Dropdown
-                    placeholder="Choose category"
-
-                    // options={[
-                    //     {
-                    //         text: "Basketball",
-                    //         value: "sports"
-                    //     },
-                    //     {
-                    //         text: "Cuisine",
-                    //         value: "food"
-                    //     },
-                    //     {
-                    //         text: "Sci-fi",
-                    //         value: "movie"
-                    //     },
-                    // ]}
-                    // use return value of options function to replace above data structure
-                    options={options}
-                    selection
-                    value={topicName}
-                    onChange={(e, { value}) => setTopicName(value)}
-                />
-                <Form.Button>Submit</Form.Button>
-            </Form>
-        </Container>
-    )
-};
-
-export default NewPost;
+export default Topics;
