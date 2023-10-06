@@ -1,6 +1,7 @@
 # Social Media Platform
 
-https://kai-social-platform.web.app/
+https://nyc-social-platform.web.app/
+<!-- https://kai-social-platform.web.app/ -->
 
 A social media platform built with React, Firebase, and Semantic UI React.
 
@@ -44,3 +45,54 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/your-username/social-media-platform.git
+
+
+# Hosting on Firebase
+
+* Step 1
+Download Firebase in terminal
+```
+npm install -g firebase-tools
+```
+
+* Step 2
+Login Firebase
+```
+firebase login
+```
+
+* Step 2
+Initialize Firebase
+```
+firebase init
+```
+
+* Step 3
+Choose "Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys"
+
+* Step 4
+Use a existing project (Set up project on Firebase website in advance)
+
+* Step 5
+What do you want to use as your public directory? 
+Type "build"
+
+* Step 6
+Configure as a single-page app (rewrite all urls to /index.html)? 
+Select "Y"
+
+* Step 7
+Set up automatic builds and deploys with GitHub? 
+Select "No"
+
+* Step 8
+Build
+```
+npm run build
+```
+
+* Step 9
+Deploy website application
+```
+firebase deploy
+```
