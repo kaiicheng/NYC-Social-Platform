@@ -3,7 +3,7 @@
 https://nyc-social-platform.web.app/
 <!-- https://kai-social-platform.web.app/ -->
 
-A NYC social media platform built with React, Firebase, and Semantic UI React.
+NYC social media platform built with React, Firebase, and Semantic UI React.
 
 ## Table of Contents
 
