@@ -14,6 +14,10 @@ import firebase from "../utils/firebase";
 import Post from "../components/Post"
 
 
+
+import { Grid } from 'semantic-ui-react';
+
+
 function Posts() {
     // return "Hello, Posts";
 
@@ -83,7 +87,10 @@ function Posts() {
 
         //             <Grid.Column width={10}>
                     <>
-                        <Item.Group>
+                        {/*  */}
+                        {/* <Item.Group>
+
+                            
                             {posts.map((post) => { 
                                 // return <p>{post.title}</p>
                                 return (
@@ -93,7 +100,7 @@ function Posts() {
 
                                     // as={Link} us Link item to render AND lead to  
                                     // <Item key={post.id} as={Link} to={`/posts/${post.id}`}>
-                                    //     {/* use photo uploaded or default image */}
+                                    //     use photo uploaded or default image
                                     //     <Item.Image 
                                     //         src={post.imageURL || "https://react.semantic-ui.com/images/wireframe/image.png"} 
                                     //         size="medium"
@@ -117,9 +124,27 @@ function Posts() {
                                 );
                                 })  
                             }
-                        </Item.Group>
+                        </Item.Group> */}
+
+
+                        <Grid>
+                            {/* 每个Grid.Row将作为一个帖子的容器 */}
+                            <Grid.Row>
+                                {posts.map((post) => (
+                                    // 为每个帖子分配相等的空间，如果希望一行显示三个帖子，则每个Grid.Column宽度为16/3
+                                    // 注意这里我们使用了Math.floor来确保宽度为整数
+                                    // <Grid.Column key={post.id} width={Math.floor(16 / 2)}>
+                                    // <Grid.Column key={post.id} width={Math.floor(5.3333)}>
+                                    <Grid.Column key={post.id} mobile={16} tablet={8} computer={5}>
+                                        <Post post={post} />
+                                    </Grid.Column>
+                                ))}
+                            </Grid.Row>
+                        </Grid>
+                        
                         {/* an invisible line at the buttom of the web page, 
                         once scroll down to the buttom, activate onEnter and print out "test" */}
+
                         <Waypoint 
                             onEnter={() => {
                             // console.log("test")
@@ -135,7 +160,7 @@ function Posts() {
                                         .orderBy("createdAt", "desc")
                                         .startAfter(lastPostSnapshotRef.current)
                                         // limit to only 3 posts on the page
-                                        .limit(3)
+                                        .limit(6)
                                         .get()
                                         .then((collectionSnapshot) =>{
                                             const data = collectionSnapshot.docs.map(docSnapshot => {
@@ -154,7 +179,7 @@ function Posts() {
                                         .orderBy("createdAt", "desc")
                                         .startAfter(lastPostSnapshotRef.current)
                                         // limit to only 3 posts on the page
-                                        .limit(3)
+                                        .limit(6)
                                         .get()
                                         .then((collectionSnapshot) =>{
                                             const data = collectionSnapshot.docs.map(docSnapshot => {
