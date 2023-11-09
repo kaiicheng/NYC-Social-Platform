@@ -1,6 +1,6 @@
 # Social Media Platform
 
-<img src="Demo.png" width="120%">
+<img src="Demo.png" width="100%">
 
 https://nyc-social-platform.web.app/
 <!-- https://kai-social-platform.web.app/ -->
