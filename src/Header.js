@@ -56,7 +56,8 @@ function Header({ user }) {
     // to="/" is homepage
     // click Register/Login leads to /signin
     // click Social Platform leads to homepage
-    return <Menu>
+    return <div className="ui container">
+    <Menu>
         <Menu.Item as={Link} to="/posts">  
             Social Platform
         </Menu.Item> 
@@ -91,6 +92,7 @@ function Header({ user }) {
                 )}
             </Menu.Menu>
         </Menu>
+    </div>
     ;
 }
 
