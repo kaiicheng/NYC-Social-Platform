@@ -58,42 +58,48 @@ npm install -g firebase-tools
 ```
 
 * Step 2
+Open firebase tools
+
+* Step 3
+Change directory to the folder of project
+
+* Step 4
 Login Firebase
 ```
 firebase login
 ```
 
-* Step 2
+* Step 5
 Initialize Firebase
 ```
 firebase init
 ```
 
-* Step 3
+* Step 6
 Choose "Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys"
 
-* Step 4
+* Step 7
 Use a existing project (Set up project on Firebase website in advance)
 
-* Step 5
+* Step 8
 What do you want to use as your public directory? 
 Type "build"
 
-* Step 6
+* Step 9
 Configure as a single-page app (rewrite all urls to /index.html)? 
 Select "Y"
 
-* Step 7
+* Step 10
 Set up automatic builds and deploys with GitHub? 
 Select "No"
 
-* Step 8
+* Step 11
 Build
 ```
 npm run build
 ```
 
-* Step 9
+* Step 12
 Deploy website application
 ```
 firebase deploy
