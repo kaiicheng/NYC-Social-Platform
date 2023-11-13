@@ -90,7 +90,7 @@ Configure as a single-page app (rewrite all urls to /index.html)?
 Select "Y"
 
 * Step 10
-Set up automatic builds and deploys with GitHub? 
+  Set up automatic builds and deploys with GitHub? 
 Select "No"
 
 * Step 11
