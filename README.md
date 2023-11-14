@@ -51,17 +51,14 @@ Before you begin, ensure you have met the following requirements:
 
 # Hosting on Firebase
 
-* Step 1: 
-Download Firebase in terminal
+* Download Firebase in terminal
 ```
 npm install -g firebase-tools
 ```
 
-* Step 2: 
-Open firebase tools
+* Open firebase tools
 
-* Step 3: 
-Change directory to the folder of project
+* Change directory to the folder of project
 
 * Step 4: 
 Login Firebase
